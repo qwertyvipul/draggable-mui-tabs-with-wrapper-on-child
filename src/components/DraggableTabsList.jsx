@@ -6,6 +6,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import DraggableTab from './DraggableTab';
 import Tab from '@mui/material/Tab';
+import Stack from '@mui/material/Stack';
 
 export default function DraggableTabsList(props) {
     const [value, setValue] = React.useState('1');
@@ -14,59 +15,51 @@ export default function DraggableTabsList(props) {
         setValue(newValue);
     };
 
-    const [tabs, setTabs] = React.useState([
-        { id: 'tab1', label: 'Tab 1', value: '1', content: 'Content 1' },
-        { id: 'tab2', label: 'Tab 2', value: '2', content: 'Content 2' },
-        { id: 'tab3', label: 'Tab 3', value: '3', content: 'Content 3' },
-        { id: 'tab4', label: 'Tab 4', value: '4', content: 'Content 4' },
-        { id: 'tab5', label: 'Tab 5', value: '5', content: 'Content 5' },
-    ]);
+    const _renderTabList = (droppableProvided) => (
+        <TabList onChange={handleChange} aria-label="Draggable Tabs">
+            {props.tabs.map((tab, index) => {
+                const child = (
+                    <Tab label={tab.label} value={tab.value} key={index} />
+                );
 
-    const onDragEnd = (result) => {
-        const newTabs = Array.from(tabs);
-        const draggedTab = newTabs.splice(result.source.index, 1)[0];
-        newTabs.splice(result.destination.index, 0, draggedTab);
-        setTabs(newTabs);
-    };
+                return (
+                    <DraggableTab
+                        label={tab.label}
+                        value={tab.value}
+                        index={index}
+                        key={index}
+                        child={child}
+                    />
+                );
+            })}
+            {droppableProvided ? droppableProvided.placeholder : null}
+        </TabList>
+    );
+
+    const _renderTabListWrappedInDroppable = () => (
+        <DragDropContext onDragEnd={props.onDragEnd}>
+            <Droppable droppableId="1" direction="horizontal">
+                {(droppableProvided) => (
+                    <div
+                        ref={droppableProvided.innerRef}
+                        {...droppableProvided.droppableProps}
+                    >
+                        {_renderTabList(droppableProvided)}
+                    </div>
+                )}
+            </Droppable>
+        </DragDropContext>
+    );
 
     return (
         <Box sx={{ width: '100%', typography: 'body1' }}>
             <TabContext value={value}>
                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                    <DragDropContext onDragEnd={onDragEnd}>
-                        <Droppable droppableId="1" direction="horizontal">
-                            {(droppableProvided) => (
-                                <div
-                                    ref={droppableProvided.innerRef}
-                                    {...droppableProvided.droppableProps}
-                                >
-                                    <TabList
-                                        onChange={handleChange}
-                                        aria-label="lab API tabs example"
-                                    >
-                                        {tabs.map((tab, index) => {
-                                            const child = (
-                                                <DraggableTab
-                                                    child={
-                                                        <Tab
-                                                            label={tab.label}
-                                                            value={tab.value}
-                                                        />
-                                                    }
-                                                    index={index}
-                                                    key={index}
-                                                />
-                                            );
-                                            return child;
-                                        })}
-                                        {droppableProvided.placeholder}
-                                    </TabList>
-                                </div>
-                            )}
-                        </Droppable>
-                    </DragDropContext>
+                    <Stack direction="column">
+                        {_renderTabListWrappedInDroppable()}
+                    </Stack>
                 </Box>
-                {tabs.map((tab, index) => (
+                {props.tabs.map((tab, index) => (
                     <TabPanel value={tab.value} key={index}>
                         {tab.content}
                     </TabPanel>

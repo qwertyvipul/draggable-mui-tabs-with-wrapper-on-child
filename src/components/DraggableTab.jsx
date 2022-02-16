@@ -3,7 +3,6 @@ import { Draggable } from 'react-beautiful-dnd';
 import Tab from '@mui/material/Tab';
 
 export default function DraggableTab(props) {
-    console.log(props.child);
     return (
         <Draggable draggableId={`${props.index}`} index={props.index}>
             {(draggableProvided) => (
@@ -12,7 +11,7 @@ export default function DraggableTab(props) {
                     {...draggableProvided.draggableProps}
                 >
                     <span {...draggableProvided.dragHandleProps}>||</span>
-                    {props.child}
+                    {React.cloneElement(props.child, { ...props })}
                 </div>
             )}
         </Draggable>
