@@ -1,45 +1,24 @@
 import * as React from 'react';
 import './styles.css';
 import DraggableTabsList from './components/draggable-tabs/DraggableTabsList';
-import DndExample from './components/examples/AutoScrollVerticalExample';
 import HorizontalExample from './components/examples/HorizontalExample';
-import { styled } from '@mui/material/styles';
+import MuiCopy from './components/examples/MuiCopy';
+import DraggableItemsList from './components/examples/DraggableItemsList';
 
 export default function App() {
-    const [tabs, setTabs] = React.useState(
-        [...Array(55)].map((_, index) => ({
-            id: `tab${index + 1}`,
-            label: `Tab ${index + 1}`,
-            value: `${index + 1}`,
-            content: `Content ${index + 1}`,
-        }))
-    );
-
-    //     [
-    //     { id: 'tab1', label: 'Tab 1', value: '1', content: 'Content 1' },
-    //     { id: 'tab2', label: 'Tab 2', value: '2', content: 'Content 2' },
-    //     { id: 'tab3', label: 'Tab 3', value: '3', content: 'Content 3' },
-    //     { id: 'tab4', label: 'Tab 4', value: '4', content: 'Content 4' },
-    //     { id: 'tab5', label: 'Tab 5', value: '5', content: 'Content 5' },
-    // ]);
-
-    const onDragEnd = (result) => {
-        const newTabs = Array.from(tabs);
-        const draggedTab = newTabs.splice(result.source.index, 1)[0];
-        newTabs.splice(result.destination.index, 0, draggedTab);
-        setTabs(newTabs);
-    };
-
     return (
         <div className="App">
-            <h3>Draggable Tab List</h3>
-            <DraggableTabsList onDragEnd={onDragEnd} tabs={tabs} />
+            <h1>Draggable Tab List</h1>
+            <DraggableTabsList />
             <hr />
-            <h3>Horizontal Draggable Divs in Div</h3>
+            <h1>Mui Copy</h1>
+            <MuiCopy />
+            <hr />
+            <h1>Horizontal Example</h1>
             <HorizontalExample />
             <hr />
-            <h3>Vertical Draggable Divs in Div</h3>
-            <DndExample />
+            <h1>Draggable Items List</h1>
+            <DraggableItemsList />
             <hr />
         </div>
     );

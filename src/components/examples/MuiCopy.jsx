@@ -6,47 +6,44 @@ const MuiTabsRootCopy = styled.div({
     // display: 'flex',
     // overflow: 'hidden',
     //--------------------//
-    // display: 'flex',
-    // overflowX: 'scroll',
+    overflowX: 'scroll',
 });
 
 const MuiTabsScrollerCopy = styled.div({
     // display: 'block',
-    // flexBasis: 'auto',
-    // flexGrow: 1,
-    // flexShrink: 1,
-    // overflowX: 'auto',
-    // overflowY: 'hidden',
-    // position: 'relative',
-    // scrollbarWidth: 'none',
+    flexBasis: 'auto',
+    flexGrow: 1,
+    flexShrink: 1,
+    overflowX: 'auto',
+    overflowX: 'scroll',
+    overflowY: 'hidden',
+    position: 'relative',
+    scrollbarWidth: 'none',
     //--------------------//
-    // display: 'flex',
-    // overflowX: 'scroll',
+    display: 'flex',
 });
 
 const MuiTabsFlexContainerCopy = styled.div({
     display: 'flex',
     whiteSpace: 'nowrap',
-    //--------------------//
 });
 
 const MuiButtonBaseRootCopy = styled.button({
-    // appearance: 'none',
-    // boxSizing: 'border-box',
+    appearance: 'none',
+    boxSizing: 'border-box',
     padding: '12px 16px',
-    // cursor: 'grab',
-    // display: 'inline-flex',
-    // flexDirection: 'column',
-    // flexShrink: '0',
-    // overflow: 'hidden',
-    // position: 'relative',
-    // touchAction: 'manipulation',
-    // userSelect: 'none',
-    // verticalAlign: 'middle',
-    //--------------------//
+    cursor: 'grab',
+    display: 'inline-flex',
+    flexDirection: 'column',
+    flexShrink: '0',
+    overflow: 'hidden',
+    position: 'relative',
+    touchAction: 'manipulation',
+    userSelect: 'none',
+    verticalAlign: 'middle',
 });
 
-export const DndExample = () => {
+export const MuiCopy = () => {
     const [itemsList, setItemsList] = React.useState(
         [...Array(55)].map((_, index) => ({
             label: `Item ${index + 1}`,
@@ -99,7 +96,7 @@ export const DndExample = () => {
     return (
         <div>
             <DragDropContext onDragEnd={onDragEnd}>
-                <div style={{ display: 'flex', overflow: 'scroll' }}>
+                <div>
                     <Droppable droppableId="1" direction="horizontal">
                         {(droppableProvided) => {
                             return (
@@ -118,4 +115,4 @@ export const DndExample = () => {
     );
 };
 
-export default DndExample;
+export default MuiCopy;
