@@ -1,8 +1,9 @@
 import * as React from 'react';
 import './styles.css';
-import DraggableTabsList from './components/draggable/DraggableTabsList';
-import DndExample from './components/dnd/DndExample';
-import TabsList from './components/simple-tabs/TabsList';
+import DraggableTabsList from './components/draggable-tabs/DraggableTabsList';
+import DndExample from './components/examples/AutoScrollVerticalExample';
+import HorizontalExample from './components/examples/HorizontalExample';
+import { styled } from '@mui/material/styles';
 
 export default function App() {
     const [tabs, setTabs] = React.useState(
@@ -34,7 +35,10 @@ export default function App() {
             <h3>Draggable Tab List</h3>
             <DraggableTabsList onDragEnd={onDragEnd} tabs={tabs} />
             <hr />
-            <h3>Normal Draggable Divs in Div</h3>
+            <h3>Horizontal Draggable Divs in Div</h3>
+            <HorizontalExample />
+            <hr />
+            <h3>Vertical Draggable Divs in Div</h3>
             <DndExample />
             <hr />
         </div>

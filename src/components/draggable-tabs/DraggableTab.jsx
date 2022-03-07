@@ -16,7 +16,6 @@ export default function DraggableTab(props) {
                     {React.cloneElement(props.child, {
                         ...props,
                         ...draggableProvided.dragHandleProps,
-                        style: { cursor: 'inherit' },
                     })}
                 </div>
             )}
